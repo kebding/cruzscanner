@@ -27,8 +27,14 @@ def add_id():
 
 @app.route("/show_ids", methods = ["GET"])
 def show_ids():
-    with open("ids.txt", "r") as f:
-        content = f.read()
+    try:
+        with open("ids.txt", "r") as f:
+            content = f.read()
+    except IOError:
+        # if there is no ids.txt, create an empty ids.txt
+        ids_file = open("ids.txt", "w")
+        ids_file.close()
+        content = ''
     return render_template("submissions.html", content=content)
 
 @app.route("/clear", methods = ["POST"])
