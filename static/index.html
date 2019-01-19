@@ -1,10 +1,16 @@
-<html>
+<html lang="en">
 <head>
   
-<form action="./add_attendance">
+<form action="/add_id" method="post" name="id">
     Student ID Number:<br>
-    <input type="text" name="studentID"><br>
+    <input type="text" name="id" autofocus><br>
 	<input type="submit" value="Submit">
+</form>
+
+<br><br>
+
+<form action="/show_ids" method="get" name="show_ids">
+    <input type="submit" value="Show submitted IDs">
 </form>
 
 </html>
