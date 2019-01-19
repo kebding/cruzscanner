@@ -22,7 +22,15 @@ def add_id():
     ids_file = open("ids.txt", 'a')
     ids_file.write(submission)
     ids_file.write('\n')
-    ids_file.close()
+    ids_file.close()  
+    try:
+        with open("ids.txt", "r") as f:
+            content = f.read()
+    except IOError:
+        # if there is no ids.txt, create an empty ids.txt
+        ids_file = open("ids.txt", "w")
+        ids_file.close()
+        content = ''
     return redirect('/', code=302)
 
 @app.route("/show_ids", methods = ["GET"])
