@@ -18,7 +18,7 @@ def homepage():
 @app.route("/scanner", methods=["GET", "POST"])
 def scanner():
     if request.method == "POST":
-        #update_db()
+        update_db(request)
         submissions,section,week = get_current_settings(request)
     else:
         submissions = 'no submissions yet'
@@ -33,20 +33,27 @@ def scanner():
 
 def update_db(request):
     try:
-        db = sqlite3.connect('submissions.sqlite3')
+        db = sqlite3.connect('db/submissions.sqlite3')
     except Error as e:
         print(e)
         return
 
     c = db.cursor()
 
-    c.execute('''CREATE TABLE IF NOT EXISTS attendances''')
-    
+    c.execute('''CREATE TABLE IF NOT EXISTS attendances(
+        id TEXT PRIMARY KEY,
+        section TEXT,
+        week TEXT
+        )''')
+
     sid = str(request.form.get("id_entry"))
     section = str(request.form.get("section"))
     week = str(request.form.get("week"))
 
-    c.execute("INSERT INTO attendances VALUES ({},{},{})" % sid, section, week)
+    c.execute("INSERT INTO attendances VALUES (?,?,?)", (sid,section,week))
+
+    db.commit()
+    db.close()
 
     return redirect('/', code=302)
 
