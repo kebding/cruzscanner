@@ -19,9 +19,6 @@ def scanner():
         submissions,section,week = get_current_settings(request)
     else:
         submissions = 'no submissions yet'
-        # clear ids.txt
-        ids_file = open("ids.txt", "w")
-        ids_file.close()
         # go with default week and section
         section = "01A"
         week = "1"
