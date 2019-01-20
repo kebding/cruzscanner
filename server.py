@@ -3,8 +3,6 @@ from flask import request, redirect
 from flask import Response
 from flask import render_template
 import sqlite3
-
-import sqlite3
 import pandas
 import smtplib
 
