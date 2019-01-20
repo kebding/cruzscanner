@@ -14,6 +14,13 @@ app.config.from_object(__name__)
 def homepage():
     return app.send_static_file('index.html')
 
+@app.route("/goto_scan", methods=["POST"])
+def goto_scan():
+    #ids_file = open("ids.txt", "w")
+    #ids_file.close()
+    content = ''
+    return render_template("scanner.html", content=content)
+
 @app.route("/add_id", methods=["POST"])
 def add_id():
     if request.method != "POST":
@@ -32,7 +39,7 @@ def add_id():
         ids_file.close()
         content = ''
     #return redirect('/', code=302)
-    return render_template("index.html", content=content)
+    return render_template("scanner.html", content=content)
 
 @app.route("/show_ids", methods = ["GET"])
 def show_ids():

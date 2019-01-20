@@ -3,29 +3,11 @@
 </head>
     
 <body>
-    <h1>Scann ID's</h1>
-    <fieldset>
-        <legend>Text input</legend>
-        <form action="/add_id" method="post" name="id">
-            Student ID Number:<br>
-            <input type="text" name="id" autofocus><br><br>
-            <input type="submit" value="Submit">
-        </form>
-    </fieldset>
-
+    <h1>Home Page</h1>
     <br>
-    <fieldset>
-        <legend>Data Received</legend>
-        <form>
-            <pre>{{ content }}</pre>
-        </form>
-    </fieldset>
-    
-    <br>
-    <form action="/save" method="get" name="save">
-        <input type="submit" value="Save & Exit">
-    </form>
-    
+    <form action="/goto_scan" method="post" name="scan">
+        <input type="submit" value="Scann!">
+    </form> 
 </body>
     
 </html>
