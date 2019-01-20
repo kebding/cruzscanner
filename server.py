@@ -18,59 +18,40 @@ def homepage():
 @app.route("/scanner", methods=["GET", "POST"])
 def scanner():
     if request.method == "POST":
-        content = get_current_settings()
+        #update_db()
+        submissions,section,week = get_current_settings(request)
     else:
-        content = 'no submissions yet'
+        submissions = 'no submissions yet'
         # clear ids.txt
         ids_file = open("ids.txt", "w")
         ids_file.close()
-    section = get_section()
-    week = get_week()
-    return render_template("scanner.html", content=content, 
+        # go with default week and section
+        section = "01A"
+        week = "1"
+    return render_template("scanner.html", submissions=submissions,
             current_section=section, current_week=week)
 
-@app.route("/save", methods = ["POST"])
-def save():
+def update_db(request):
     try:
         db = sqlite3.connect('submissions.sqlite3')
     except Error as e:
         print(e)
+        return
 
     c = db.cursor()
 
     c.execute('''CREATE TABLE IF NOT EXISTS attendances''')
-    section_and_week= str(request.form.get("save_to_db"))
-     
+    
+    sid = str(request.form.get("id_entry"))
+    section = str(request.form.get("section"))
+    week = str(request.form.get("week"))
+
+    c.execute("INSERT INTO attendances VALUES ({},{},{})" % sid, section, week)
 
     return redirect('/', code=302)
-    
 
 
-def get_section():
-    try:
-        with open("section.txt", "r") as f:
-            section = f.read().rstrip()
-        f.close()
-    except IOError:
-        section_file = open("section.txt", "w")
-        section_file.write("01A")
-        section_file.close()
-        section = "01A"
-    return section
-
-def get_week():
-    try:
-        with open("week.txt", "r") as f:
-            week = f.read().rstrip()
-        f.close()
-    except IOError:
-        week_file = open("week.txt", "w")
-        week_file.write("1")
-        week_file.close()
-        week = "1"
-    return week
-
-def get_current_settings():
+def get_current_settings(request):
     #TODO: replace ids.txt with database 
     submission = str(request.form.get("id_entry"))
     if submission is not None and submission != "None":
@@ -80,25 +61,17 @@ def get_current_settings():
         ids_file.close()  
     try:
         with open("ids.txt", "r") as f:
-            content = f.read()
+            submissions = f.read()
         f.close()
     except IOError:
         # if there is no ids.txt, create an empty ids.txt
         ids_file = open("ids.txt", "w")
         ids_file.close()
-        content = 'no submissions yet'
-    week = str(request.form.get("week"))
-    if week is not None and week != "None":
-        week_file = open("week.txt", "w")
-        week_file.write(week)
-        week_file.close()
+        submissions = 'no submissions yet'
     section = str(request.form.get("section"))
-    if section is not None and section != "None":
-        section_file = open("section.txt", "w")
-        section_file.write(section)
-        section_file.close()
+    week = str(request.form.get("week"))
 
-    return content
+    return submissions,section,week
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80) 
