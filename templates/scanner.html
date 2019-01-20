@@ -3,60 +3,116 @@
 </head>
     
 <body>
-    <h1>Scann IDs</h1>
+    <h1>Scan IDs</h1>
     <fieldset>
         <legend>Text input</legend>
-        <form onsubmit="appendID()" name="id">
+        <form action="/scanner" method="post" id="id_form">
             Student ID Number:<br>
-            <input type="text" name="id" autofocus><br><br>
+            <input type="text" name="id_entry" id="id_entry" autofocus><br><br>
+            <select id="section" name="section">
+                {% if current_section == "01A": %}
+                <option selected="selected" value="01A">01A<br>
+                {% else %}
+                <option value="01A">01A<br>
+                {% endif %}
+                {% if current_section == "01B": %}
+                <option selected="selected" value="01B">01B<br>
+                {% else %}
+                <option value="01B">01B<br>
+                {% endif %}
+                {% if current_section == "01C": %}
+                <option selected="selected" value="01C">01C<br>
+                {% else %}
+                <option value="01C">01C<br>
+                {% endif %}
+                {% if current_section == "01D": %}
+                <option selected="selected" value="01D">01D<br>
+                {% else %}
+                <option value="01D">01D<br>
+                {% endif %}
+                {% if current_section == "01E": %}
+                <option selected="selected" value="01E">01E<br>
+                {% else %}
+                <option value="01E">01E<br>
+                {% endif %}
+                {% if current_section == "01F": %}
+                <option selected="selected" value="01F">01F<br>
+                {% else %}
+                <option value="01F">01F<br>
+                {% endif %}
+                {% if current_section == "01G": %}
+                <option selected="selected" value="01G">01G<br>
+                {% else %}
+                <option value="01G">01G<br>
+                {% endif %}
+                {% if current_section == "01H": %}
+                <option selected="selected" value="01H">01H<br>
+                {% else %}
+                <option value="01H">01H<br>
+                {% endif %}
+            </select>Section<br>
+            <select id="week" name="week">
+                {% if current_week== "1": %}
+                <option selected="selected" value="1">1<br>
+                {% else %}
+                <option value=1>1<br>
+                {% endif %}
+                {% if current_week== "2": %}
+                <option selected="selected" value="2">2<br>
+                {% else %}
+                <option value=2>2<br>
+                {% endif %}
+                {% if current_week== "3": %}
+                <option selected="selected" value="3">3<br>
+                {% else %}
+                <option value=3>3<br>
+                {% endif %}
+                {% if current_week== "4": %}
+                <option selected="selected" value="4">4<br>
+                {% else %}
+                <option value=4>4<br>
+                {% endif %}
+                {% if current_week== "5": %}
+                <option selected="selected" value="5">5<br>
+                {% else %}
+                <option value=5>5<br>
+                {% endif %}
+                {% if current_week== "6": %}
+                <option selected="selected" value="6">6<br>
+                {% else %}
+                <option value=6>6<br>
+                {% endif %}
+                {% if current_week== "7": %}
+                <option selected="selected" value="7">7<br>
+                {% else %}
+                <option value=7>7<br>
+                {% endif %}
+                {% if current_week== "8": %}
+                <option selected="selected" value="8">8<br>
+                {% else %}
+                <option value=8>8<br>
+                {% endif %}
+                {% if current_week== "9": %}
+                <option selected="selected" value="9">9<br>
+                {% else %}
+                <option value=9>9<br>
+                {% endif %}
+                {% if current_week== "10": %}
+                <option selected="selected" value="10">10<br>
+                {% else %}
+                <option value=10>10<br>
+                {% endif %}
+            </select>Week<br>
             <input type="submit" value="Submit">
         </form>
     </fieldset>
 
-    <br>
     <fieldset>
         <legend>Data Received</legend>
-        <p name="IDs"></p>
+        <pre id="ids_display">{{ content }}</pre>
     </fieldset>
-    
-    <br>
-    <form action="/save" method="post" name="save">
-        <select name="section">
-            <option value="01A">01A<br>
-            <option value="01B">01B<br>
-            <option value="01C">01C<br>
-            <option value="01D">01D<br>
-            <option value="01E">01E<br>
-            <option value="01F">01F<br>
-            <option value="01G">01G<br>
-            <option value="01H">01H<br>
-        </select>
-        <select name="week">
-            <option value=1>1<br>
-            <option value=2>2<br>
-            <option value=3>3<br>
-            <option value=4>4<br>
-            <option value=5>5<br>
-            <option value=6>6<br>
-            <option value=7>7<br>
-            <option value=8>8<br>
-            <option value=9>9<br>
-            <option value=10>10<br>
-        </select>
-
-        <input type="submit" value="Save & Exit">
-    </form>
     
 </body>
     
-
-<script>
-function appendIDs() {
-    newID = document.getElementById("id").value;
-    document.getElementById("IDs").innerHTML += newID;
-    document.getElementById("demo").innerHTML += "<br>";
-}
-</script>
-
 
 </html>
