@@ -22,7 +22,7 @@ def goto_scan():
     content = ''
     return render_template("scanner.html", content=content)
 
-@app.route("/add_id", methods=["POST"])
+@app.route("/add_id", methods=["GET", "POST"])
 def add_id():
     submission = str(request.form.get("id"))
     ids_file = open("ids.txt", 'a')
@@ -62,8 +62,8 @@ def save():
     c = db.cursor()
 
     c.execute('''CREATE TABLE IF NOT EXISTS attendances''')
-    #new_entries = str(request.form.get("
-    # WIP 
+    new_entries = str(request.form.get("save"))
+     
 
     return redirect('/', code=302)
     

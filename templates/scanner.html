@@ -3,10 +3,10 @@
 </head>
     
 <body>
-    <h1>Scann ID's</h1>
+    <h1>Scann IDs</h1>
     <fieldset>
         <legend>Text input</legend>
-        <form action="/add_id" method="post" name="id">
+        <form onsubmit="appendID()" name="id">
             Student ID Number:<br>
             <input type="text" name="id" autofocus><br><br>
             <input type="submit" value="Submit">
@@ -16,16 +16,47 @@
     <br>
     <fieldset>
         <legend>Data Received</legend>
-        <form>
-            <pre>{{ content }}</pre>
-        </form>
+        <p name="IDs"></p>
     </fieldset>
     
     <br>
-    <form action="/save" method="get" name="save">
+    <form action="/save" method="post" name="save">
+        <select name="section">
+            <option value="01A">01A<br>
+            <option value="01B">01B<br>
+            <option value="01C">01C<br>
+            <option value="01D">01D<br>
+            <option value="01E">01E<br>
+            <option value="01F">01F<br>
+            <option value="01G">01G<br>
+            <option value="01H">01H<br>
+        </select>
+        <select name="week">
+            <option value=1>1<br>
+            <option value=2>2<br>
+            <option value=3>3<br>
+            <option value=4>4<br>
+            <option value=5>5<br>
+            <option value=6>6<br>
+            <option value=7>7<br>
+            <option value=8>8<br>
+            <option value=9>9<br>
+            <option value=10>10<br>
+        </select>
+
         <input type="submit" value="Save & Exit">
     </form>
     
 </body>
     
+
+<script>
+function appendIDs() {
+    newID = document.getElementById("id").value;
+    document.getElementById("IDs").innerHTML += newID;
+    document.getElementById("demo").innerHTML += "<br>";
+}
+</script>
+
+
 </html>
