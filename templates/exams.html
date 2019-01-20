@@ -1,0 +1,31 @@
+<html lang="en">
+<head>  
+</head>
+    
+<body>
+    <h1>Exam Scanner</h1>
+    <fieldset>
+        <legend>Record Submission</legend>
+        <form action="/exam_id" method="post" name="exam_id">
+            Student ID Number:<br>
+            <input type="text" name="id" autofocus><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </fieldset>
+
+    <br>
+    <fieldset>
+        <legend>Result</legend>
+        <form>
+            <pre>{{ content }}</pre>
+        </form>
+    </fieldset>
+    
+    <br>
+    <form action="/e_save" method="get" name="e_save">
+        <input type="submit" value="Save & Exit">
+    </form>
+    
+</body>
+    
+</html>
