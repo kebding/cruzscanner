@@ -1,10 +1,7 @@
 from flask import Flask
-from flask import request, redirect, url_for
+from flask import request, redirect
 from flask import Response
-from subprocess import call
-import datetime 
-import os
-from flask import g, session, abort, render_template, flash
+from flask import render_template
 import sqlite3
 
 app = Flask(__name__)

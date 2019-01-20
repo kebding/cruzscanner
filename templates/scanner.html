@@ -5,10 +5,10 @@
 <body>
     <h1>Scan IDs</h1>
     <fieldset>
-        <legend>Text input</legend>
+        <legend>Input</legend>
         <form action="/scanner" method="post" id="id_form">
             Student ID Number:<br>
-            <input type="text" name="id_entry" id="id_entry" autofocus><br><br>
+            <input type="text" name="id_entry" id="id_entry" autofocus><br>
             <select id="section" name="section">
                 {% if current_section == "01A": %}
                 <option selected="selected" value="01A">01A<br>
@@ -108,7 +108,7 @@
     </fieldset>
 
     <fieldset>
-        <legend>Data Received</legend>
+        <legend>Entries for the current section</legend>
         <pre id="ids_display">{{ submissions }}</pre>
     </fieldset>
     
