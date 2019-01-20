@@ -27,8 +27,11 @@ to the users, but note that the database is always stored with the server.
 
 
 DEPENDENCIES:
--Python
+-Python libraries:
     -Flask
     -Pandas
-    -SQLite3
+    -sqlite3
+    -email.mime.multipaty
+    -email.mime.text
+    -smtplib
 -SQLite3
