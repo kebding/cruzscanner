@@ -15,19 +15,19 @@ def homepage():
 @app.route("/scanner", methods=["GET", "POST"])
 def scanner():
     if request.method == "POST":
-        update_db(request)
-        submissions,section,week = get_current_settings(request)
+        submit_attendance(request)
+        attendances,section,week = get_current_settings(request)
     else:
-        submissions = 'no submissions yet'
+        attendances = 'no attendances yet'
         # go with default week and section
         section = "01A"
         week = "1"
-    return render_template("scanner.html", submissions=submissions,
+    return render_template("scanner.html", attendances=attendances,
             current_section=section, current_week=week)
 
-def update_db(request):
+def submit_attendance(request):
     try:
-        db = sqlite3.connect('db/submissions.sqlite3')
+        db = sqlite3.connect('db/attendances.sqlite3')
     except Error as e:
         print(e)
         return
@@ -56,21 +56,21 @@ def get_current_settings(request):
     section = str(request.form.get("section"))
     week = str(request.form.get("week"))
     try:
-        db = sqlite3.connect('db/submissions.sqlite3')
+        db = sqlite3.connect('db/attendances.sqlite3')
     except Error as e:
         print(e)
         return
     c = db.cursor()
     c.execute("SELECT DISTINCT id FROM attendances WHERE section=? AND week=?",
         (section, week))
-    submissions_raw = c.fetchall()
+    attendances_raw = c.fetchall()
     db.close()
 
-    submissions = ''
-    for i in submissions_raw:
-        submissions = submissions + str(i[0]) + '\n'
+    attendances = ''
+    for i in attendances_raw:
+        attendances = attendances + str(i[0]) + '\n'
 
-    return submissions,section,week
+    return attendances,section,week
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port=80) 
