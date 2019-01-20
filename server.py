@@ -34,10 +34,8 @@ def scanner():
     return render_template("scanner.html", attendances=attendances,
             current_section=section, current_week=week)
 
-@app.route("/goto_exams", methods=["POST"])
-def goto_exams():
-    ids_file = open("ids.txt", "w")
-    ids_file.close()
+@app.route("/exams", methods=["GET"])
+def exams():
     content = ''
     return render_template("exams.html", content=content)
 
@@ -45,7 +43,7 @@ def goto_exams():
 def upload():
     con = sqlite3.connect('test.db')
     cur = con.cursor()
-    df = pandas.read_csv('db.csv')
+    df = pandas.read_csv('db/db.csv')
     df.to_sql('roster', con, if_exists='append', index=False)
     #get_posts()
     return redirect('/', code=302)
