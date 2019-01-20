@@ -38,7 +38,6 @@ def add_id():
         ids_file = open("ids.txt", "w")
         ids_file.close()
         content = ''
-    #return redirect('/', code=302)
     return render_template("scanner.html", content=content)
 
 @app.route("/show_ids", methods = ["GET"])
