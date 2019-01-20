@@ -41,7 +41,7 @@ def update_db(request):
     c = db.cursor()
 
     c.execute('''CREATE TABLE IF NOT EXISTS attendances(
-        id TEXT PRIMARY KEY,
+        id TEXT,
         section TEXT,
         week TEXT
         )''')
@@ -59,24 +59,22 @@ def update_db(request):
 
 
 def get_current_settings(request):
-    #TODO: replace ids.txt with database 
-    submission = str(request.form.get("id_entry"))
-    if submission is not None and submission != "None":
-        ids_file = open("ids.txt", 'a')
-        ids_file.write(submission)
-        ids_file.write('\n')
-        ids_file.close()  
-    try:
-        with open("ids.txt", "r") as f:
-            submissions = f.read()
-        f.close()
-    except IOError:
-        # if there is no ids.txt, create an empty ids.txt
-        ids_file = open("ids.txt", "w")
-        ids_file.close()
-        submissions = 'no submissions yet'
     section = str(request.form.get("section"))
     week = str(request.form.get("week"))
+    try:
+        db = sqlite3.connect('db/submissions.sqlite3')
+    except Error as e:
+        print(e)
+        return
+    c = db.cursor()
+    c.execute("SELECT DISTINCT id FROM attendances WHERE section=? AND week=?",
+        (section, week))
+    submissions_raw = c.fetchall()
+    db.close()
+
+    submissions = ''
+    for i in submissions_raw:
+        submissions = submissions + str(i[0]) + '\n'
 
     return submissions,section,week
 
