@@ -31,7 +31,7 @@ DEPENDENCIES:
     -Flask
     -Pandas
     -sqlite3
-    -email.mime.multipaty
+    -email.mime.multipart
     -email.mime.text
     -smtplib
 -SQLite3
