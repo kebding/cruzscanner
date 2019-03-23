@@ -1,9 +1,9 @@
 # cruzscanner
 
-This repository provides a system for Teaching Assistants to easily manage
-large classes of students by automating the attendance check process. When
-a student ID card's barcode is scanned, the system automatically logs the 
-ID number in a database.
+This repository, built for the CruzHacks hackathon, provides a system for
+Teaching Assistants to easily manage large classes of students by 
+automating the attendance check process. When a student ID card's barcode
+is scanned, the system automatically logs the ID number in a database.
 
 When scanning ID cards to confirm that students turned in their exams, it 
 automatically sends the student an email confirming that their exam was 
@@ -35,3 +35,5 @@ DEPENDENCIES:
     -email.mime.text
     -smtplib
 -SQLite3
+
+Our thanks goes out to CruzHacks, the hackathon that inspired this project and sponsored the prizes we were competing for.
